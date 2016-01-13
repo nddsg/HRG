@@ -16,10 +16,10 @@ G = nx.karate_club_graph()
 # G = nx.barabasi_albert_graph(1000,3)
 # G = nx.connected_watts_strogatz_graph(200,8,.2)
 
-# G = nx.read_edgelist("../demo_graphs/as20000102.txt")
+# G = nx.read_edgelist("../Phoenix/demo_graphs/as20000102.txt")
 # G = nx.read_edgelist("../Phoenix/demo_graphs/CA-GrQc.txt")
-# G = nx.read_edgelist("../demo_graphs/Email-Enron.txt")
-# G = nx.read_edgelist("../demo_graphs/Brightkite_edges.txt")
+# G = nx.read_edgelist("../Phoenix/demo_graphs/Email-Enron.txt")
+# G = nx.read_edgelist("../Phoenix/demo_graphs/Brightkite_edges.txt")
 
 
 # Example From KDD Paper
