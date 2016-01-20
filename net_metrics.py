@@ -125,18 +125,18 @@ def draw_graphlet_plot(orig_g, mG):
     df = pd.DataFrame(mG)
     width = .25
 
-    N = 8
+    N = 9
     means = (
-        orig_g['e2'], orig_g['t2'], orig_g['t3'], orig_g['q3'], orig_g['qrec'], orig_g['q4'], orig_g['q5'],
+        orig_g['e2'], orig_g['t2'], orig_g['t3'], orig_g['q3'], orig_g['qstar'], orig_g['qrec'], orig_g['q4'], orig_g['q5'],
         orig_g['q6'])
     ind = np.arange(N)
     fig, ax = plt.subplots()
     rects = ax.bar(ind + .02, means, width - .02, color='k')
 
-    means = (df.mean()['e2'], df.mean()['t2'], df.mean()['t3'], df.mean()['q3'], df.mean()['qrec'], df.mean()['q4'],
+    means = (df.mean()['e2'], df.mean()['t2'], df.mean()['t3'], df.mean()['q3'], df.mean()['qstar'], df.mean()['qrec'], df.mean()['q4'],
              df.mean()['q5'], df.mean()['q6'])
     sem = (
-        df.sem()['e2'], df.sem()['t2'], df.sem()['t3'], df.sem()['q3'], df.sem()['qrec'], df.sem()['q4'],
+        df.sem()['e2'], df.sem()['t2'], df.sem()['t3'], df.sem()['q3'], df.sem()['qstar'], df.sem()['qrec'], df.sem()['q4'],
         df.sem()['q5'],
         df.sem()['q6'])
     rects = ax.bar(ind + width + .02, means, width - .02, color='b', yerr=sem)

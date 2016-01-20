@@ -54,7 +54,18 @@ def quad_graphs():
     q4.add_edge(2, 0)
     q4.add_edge(2, 3)
 
-    return qrect, q4
+    qstar = nx.Graph()
+    qstar.add_node(0)
+    qstar.add_node(1)
+    qstar.add_node(2)
+    qstar.add_node(3)
+
+    qstar.add_edge(0, 1)
+    qstar.add_edge(0, 2)
+    qstar.add_edge(0, 3)
+
+
+    return qrect, q4, qstar
 
 
 def subgraphs_cnt(G, num_smpl):
@@ -65,9 +76,10 @@ def subgraphs_cnt(G, num_smpl):
     sub['q3'] = 0
     sub['q4'] = 0
     sub['qrec'] = 0
+    sub['qstar'] = 0
     sub['q5'] = 0
     sub['q6'] = 0
-    qrec, q4 = quad_graphs()
+    qrec, q4, qstar = quad_graphs()
     for i in range(0, num_smpl):
         S = choice(G.nodes())
         # size 2
@@ -91,6 +103,8 @@ def subgraphs_cnt(G, num_smpl):
             sub['qrec'] += 1
         elif T.number_of_edges() == 4 and nx.is_isomorphic(T, q4):
             sub['q4'] += 1
+        elif T.number_of_edges() == 3 and nx.is_isomorphic(T, qstar):
+            sub['qstar'] += 1
         elif T.number_of_edges() == 5:
             sub['q5'] += 1
         elif T.number_of_edges() == 6:
