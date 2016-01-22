@@ -51,7 +51,7 @@ print "Number of Nodes:\t" + str(num_nodes)
 num_edges = G.number_of_edges()
 print "Number of Edges:\t" + str(num_edges)
 
-Ggl = gs.subgraphs_cnt(G, 100)
+
 
 # To parse a large graph we use 10 samples of size 500 each. It is
 # possible to parse the whole graph, but the approximate
@@ -70,6 +70,7 @@ print "Rule Induction Complete"
 Gstar = []
 Dstar = []
 Gstargl = []
+Ggl = []
 for run in range(0, 20):
     if num_nodes < 100:
         nG, nD = sg.grow(prod_rules, num_nodes, 1)
@@ -77,7 +78,8 @@ for run in range(0, 20):
         nG, nD = sg.grow(prod_rules, num_nodes, num_nodes / 50)
     Gstar.append(nG)
     Dstar.append(nD)
-    Gstargl.append(gs.subgraphs_cnt(nG, 100))
+    Gstargl.append(gs.subgraphs_cnt(nG, 1000))
+    Ggl.append( gs.subgraphs_cnt(G, 1000) )
     print "G* iteration " + str(run) + " of 20"
 
 # Draw figures, ERGM and Kronecker graphs are not included here in this code sample.

@@ -121,33 +121,26 @@ def draw_diam_plot(orig_g, mG):
     plt.show()
 
 
+
 def draw_graphlet_plot(orig_g, mG):
     df = pd.DataFrame(mG)
-    width = .25
+    width=.25
 
-    N = 9
-    means = (
-        orig_g['e2'], orig_g['t2'], orig_g['t3'], orig_g['q3'], orig_g['qstar'], orig_g['qrec'], orig_g['q4'], orig_g['q5'],
-        orig_g['q6'])
+    N=11
+    dforig = pd.DataFrame(orig_g)
+    means = (dforig.mean()['e0'], dforig.mean()['e1'], dforig.mean()['e2'], dforig.mean()['e2c'], dforig.mean()['tri'], dforig.mean()['p3'], dforig.mean()['star'], dforig.mean()['tritail'], dforig.mean()['square'], dforig.mean()['squarediag'], dforig.mean()['k4'])
+    sem = (dforig.sem()['e0'], dforig.sem()['e1'], dforig.sem()['e2'], dforig.sem()['e2c'], dforig.sem()['tri'], dforig.sem()['p3'], dforig.sem()['star'], dforig.sem()['tritail'], dforig.sem()['square'], dforig.sem()['squarediag'], dforig.sem()['k4'])
     ind = np.arange(N)
-    fig, ax = plt.subplots()
-    rects = ax.bar(ind + .02, means, width - .02, color='k')
+    fig,ax = plt.subplots()
+    rects = ax.bar(ind+.02, means, width-.02, color = 'k', yerr=sem)
 
-    means = (df.mean()['e2'], df.mean()['t2'], df.mean()['t3'], df.mean()['q3'], df.mean()['qstar'], df.mean()['qrec'], df.mean()['q4'],
-             df.mean()['q5'], df.mean()['q6'])
-    sem = (
-        df.sem()['e2'], df.sem()['t2'], df.sem()['t3'], df.sem()['q3'], df.sem()['qstar'], df.sem()['qrec'], df.sem()['q4'],
-        df.sem()['q5'],
-        df.sem()['q6'])
-    rects = ax.bar(ind + width + .02, means, width - .02, color='b', yerr=sem)
-
-    plt.title('Graphlet Plot')
-    plt.ylabel('Occurrences')
-    plt.xlabel('Graphlets')
+    means = (df.mean()['e0'], df.mean()['e1'], df.mean()['e2'], df.mean()['e2c'], df.mean()['tri'], df.mean()['p3'], df.mean()['star'], df.mean()['tritail'], df.mean()['square'], df.mean()['squarediag'], df.mean()['k4'])
+    sem = (df.sem()['e0'], df.sem()['e1'], df.sem()['e2'], df.sem()['e2c'], df.sem()['tri'], df.sem()['p3'], df.sem()['star'], df.sem()['tritail'], df.sem()['square'], df.sem()['squarediag'], df.sem()['k4'])
+    rects = ax.bar(ind+width+.02, means, width-.02, color = 'b', yerr=sem)
 
     plt.ylim(ymin=0)
-    # fig = plt.gcf()
-    # fig.set_size_inches(5, 4, forward=True)
+    #fig = plt.gcf()
+    #fig.set_size_inches(5, 3, forward=True)
     plt.show()
 
 
