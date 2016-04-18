@@ -4,19 +4,54 @@ import networkx as nx
 from random import choice
 from collections import deque, Counter
 
+def bfs_edges(G, source, n):
+    neighbors = G.neighbors_iter
+    visited = set([source])
+    queue = deque([(source, neighbors(source))])
+    i=0
+    while queue and i<n:
+        parent, children = queue[0]
+        try:
+            child = next(children)
+            if child not in visited:
+                i += 1
+                yield parent, child
+                visited.add(child)
+                queue.append((child, neighbors(child)))
+        except StopIteration:
+            queue.popleft()
 
 
-def sample(G):
+def ugander_sample(G, n=50):
+    S = choice(G.nodes())
+
+    T = nx.DiGraph()
+    T.add_node(S)
+    T.add_edges_from(bfs_edges(G,S,n))
+
+    Gprime = nx.subgraph(G, T.nodes())
+
     S = [0,0,0,0]
-    a = choice(G.nodes())
-    b = choice(G.nodes())
-    c = choice(G.nodes())
-    d = choice(G.nodes())
+    a = choice(Gprime.nodes())
+    b = choice(Gprime.nodes())
+    c = choice(Gprime.nodes())
+    d = choice(Gprime.nodes())
 
     Gprime = nx.subgraph(G, [a,b,c,d])
 
     return Gprime
 
+def rwr_sample(G, c, n):
+    for i in range(0,c):
+        S = choice(G.nodes())
+
+        T = nx.DiGraph()
+        T.add_node(S)
+        T.add_edges_from(bfs_edges(G,S,n))
+
+        Gprime = nx.subgraph(G, T.nodes())
+
+        yield Gprime
 
 def subgraphs_cnt(G, num_smpl):
     sub = Counter()
@@ -33,7 +68,7 @@ def subgraphs_cnt(G, num_smpl):
     sub['k4'] = 0
     for i in range(0,num_smpl):
         #size 2
-        T = sample(G)
+        T = ugander_sample(G)
         #print T.edges()
 
         if T.number_of_edges() == 0:
