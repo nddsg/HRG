@@ -3,7 +3,7 @@ Hyperedge replacement grammar parser and generator
 
 ## Publication
 
-Title: Growing Graphs from Hyperedge Replacement Graph Grammars
+Title: [Growing Graphs from Hyperedge Replacement Graph Grammars](https://arxiv.org/pdf/1608.03192.pdf)
 Authors: Salvador Aguiñaga, Rodrigo Palacios†, David Chiang, Tim Weninger University of Notre Dame
 †California State University Fresno
 
